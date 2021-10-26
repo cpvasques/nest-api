@@ -26,11 +26,13 @@ export class UserController {
     return this.userService.getAllUsers();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:username')
   async getByUsername(@Param('username') username): Promise<UserDTO> {
     return this.userService.getByUsername(username);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async createUser(@Body() user: UserDTO): Promise<NestResponse> {
     const userCreated = await this.userService.createUser(user);
@@ -44,6 +46,7 @@ export class UserController {
       .build();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async updateUser(
     @Param('id') id,
@@ -60,6 +63,7 @@ export class UserController {
       .build();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async deleteUser(@Param('id') id) {
     const userDeleted = await this.userService.deleteUser(id);

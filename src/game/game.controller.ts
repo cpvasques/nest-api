@@ -8,7 +8,9 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { NestResponse } from 'src/core/http/nest-response';
 import { NestResponseBuilder } from 'src/core/http/nest-response-builder';
 import { GameDTO } from './game.dto';
@@ -19,6 +21,7 @@ import { GameService } from './game.service';
 export class GamesController {
   constructor(private gameService: GameService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async getAll(): Promise<GameDTO[]> {
     const games = await this.gameService.getAllGames();
@@ -33,6 +36,7 @@ export class GamesController {
     return games;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('/:name')
   async getGameByName(@Param() param): Promise<GameDTO[]> {
     const games = await this.gameService.getGameByName(param.name);
@@ -47,6 +51,7 @@ export class GamesController {
     return games;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async createGame(@Body() game: GameDTO): Promise<NestResponse> {
     const gameCreated = await this.gameService.createGame(game);
@@ -60,6 +65,7 @@ export class GamesController {
       .build();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async updateGame(
     @Param('id') id,
@@ -76,6 +82,7 @@ export class GamesController {
       .build();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async deleteGame(@Param('id') id) {
     const gameDeleted = await this.gameService.deleteGame(id);
