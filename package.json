@@ -29,6 +29,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/sequelize": "^8.0.0",
     "bcrypt": "^5.0.1",
+    "cache-manager": "^3.4.4",
     "class-transformer": "0.2.3",
     "class-validator": "0.12.2",
     "mysql2": "^2.3.2",

@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Table, Model, Column, DataType } from 'sequelize-typescript';
 
 @Table

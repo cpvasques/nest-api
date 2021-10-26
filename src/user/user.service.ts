@@ -21,8 +21,8 @@ export class UserService {
     return users;
   }
 
-  async getByUsername(username: string): Promise<User> {
-    return this.userModel.findOne({ where: { username } });
+  async getByUsername(username: string): Promise<UserDTO> {
+    return this.userModel.findOne({ raw: true, where: { username } });
   }
 
   async getUserById(id: number): Promise<User> {

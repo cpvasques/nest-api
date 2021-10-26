@@ -2,12 +2,14 @@ import { ClassSerializerInterceptor, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { AuthModule } from './auth/auth.module';
 import { GameModule } from './game/game.module';
 import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     UserModule,
+    AuthModule,
     GameModule,
     ConfigModule.forRoot(),
     SequelizeModule.forRoot({

@@ -8,7 +8,9 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { NestResponse } from 'src/core/http/nest-response';
 import { NestResponseBuilder } from 'src/core/http/nest-response-builder';
 import { UserDTO } from './user.dto';
@@ -18,6 +20,7 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async getAll(): Promise<UserDTO[]> {
     return this.userService.getAllUsers();
